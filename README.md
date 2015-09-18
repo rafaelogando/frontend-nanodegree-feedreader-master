@@ -26,9 +26,9 @@ There are 7 test within 4 suits.
 
  5- Ensures the menu changes visibility when the menu icon is clicked. This test have two expectations: the menu display when clicked and it hide when clicked again.
 
- 5- Ensures when the loadFeed function is called and completes its work, there is at least a single .entry element within the .feed container.
+ 6- Ensures when the loadFeed function is called and completes its work, there is at least a single .entry element within the .feed container.
 
- -6 Ensures when a new feed is loaded by the loadFeed function that the content actually changes.
+ -7 Ensures when a new feed is loaded by the loadFeed function that the content actually changes.
 
 # How to Start the app:
 
