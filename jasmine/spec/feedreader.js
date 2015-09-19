@@ -27,7 +27,7 @@ $(function() {
          * defined and that the URL is not empty.
          */
         it("all feeds have an URL", function(){
-            for(var feed=0; feed <= allFeeds.length-1; feed++)
+            for (var feed = 0; feed < allFeeds.length; feed++)
             {
                 expect(allFeeds[feed].url).not.toBe("");
                 expect(allFeeds[feed].url).toBeDefined();
@@ -38,7 +38,7 @@ $(function() {
          * defined and that the name is not empty.
          */
         it("all feeds have a name", function(){
-            for(var feed=0; feed <= allFeeds.length-1; feed++)
+            for (var feed = 0; feed < allFeeds.length; feed++)
             {
                 expect(allFeeds[feed].name).not.toBe("");
                 expect(allFeeds[feed].name).toBeDefined();
@@ -63,7 +63,7 @@ $(function() {
         */
         it("changes visibility when the menu icon is clicked", function(){
 
-            $('.menu-icon-link').click();
+            $('.menu-icon-link').click(); //After clicking the menu icon once, the menu should display
             expect($("body").hasClass("menu-hidden")).toBe(false);
 
             $('.menu-icon-link').click();
@@ -97,8 +97,17 @@ $(function() {
         var last;
 
         beforeEach(function(done) {
-            current = $('.feed a')[0]; //Save the current value of the first feed.
-            loadFeed(1, done);// Load the next feed value and continue after it is done.
+
+            $('.feed').empty();//Empty the feed container to clear any previous feed loads.
+            loadFeed(0, function()
+            {
+                current = $('.feed').html();//Once the feed loads whe save it value.
+                loadFeed(1, function()//Then the second feed is loaded before continue with the tests and its value saved on variable "last".
+                {
+                    last = $('.feed').html();
+                    done();
+                });
+            });
         });
 
         /* This makes sure when a new feed is loaded
@@ -106,7 +115,7 @@ $(function() {
          */
         it("The content changes when new feed loads", function(){
 
-            expect($('.feed a')[0].toString()).not.toBe(current.toString()); 
+            expect(current).not.toBe(last);
         });
     });
 });
